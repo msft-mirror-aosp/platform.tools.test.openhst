@@ -44,7 +44,7 @@ __Windows__
 1.  .\env\Scripts\activate
 1.  pip3 install -r requirements.txt
 1.  Download [protoc.ext (3.11.4 version)](https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protoc-3.11.4-win64.zip) from [github](https://github.com/protocolbuffers/protobuf/releases/tag/v3.11.4)
-1.  Decompress protoc-3.11.4-win64.zip and copy bin/protoc.exe to env/bin folder.
+1.  Decompress protoc-3.11.4-win64.zip and copy bin/protoc.exe to env/ folder
 1.  Decompress protoc-3.11.4-win64.zip and copy include/* under env/include folder
 1.  make proto-compile
 
