@@ -282,7 +282,7 @@ class ProcessLogger(threading.Thread):
               continue
 
           if self.output_fp:
-            self.output_fp.write(line.decode("utf-8").rstrip())
+            self.output_fp.write(line.decode("utf-8", "backslashreplace").rstrip())
             self.output_fp.write("\n")
 
           # Loop through all events we're watching for, to see if they occur on
