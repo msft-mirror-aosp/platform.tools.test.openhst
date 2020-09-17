@@ -230,7 +230,7 @@ class ProcessLogger(threading.Thread):
 
     if output:
       stress_test_common.MakeDirsIfNeeded(os.path.dirname(output))
-      self.output_fp = open(output, "w")
+      self.output_fp = open(output, "w", encoding="utf-8")
       logging.info("Logging device info to %s", output)
     else:
       self.output_fp = None
