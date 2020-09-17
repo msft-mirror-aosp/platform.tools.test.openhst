@@ -230,7 +230,7 @@ class ProcessLogger(threading.Thread):
 
     if output:
       stress_test_common.MakeDirsIfNeeded(os.path.dirname(output))
-      self.output_fp = open(output, "w")
+      self.output_fp = open(output, "w", encoding="utf-8")
       logging.info("Logging device info to %s", output)
     else:
       self.output_fp = None
@@ -282,7 +282,7 @@ class ProcessLogger(threading.Thread):
               continue
 
           if self.output_fp:
-            self.output_fp.write(line.decode("utf-8").rstrip())
+            self.output_fp.write(line.decode("utf-8", "backslashreplace").rstrip())
             self.output_fp.write("\n")
 
           # Loop through all events we're watching for, to see if they occur on
