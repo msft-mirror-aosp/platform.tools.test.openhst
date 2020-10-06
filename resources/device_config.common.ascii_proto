@@ -59,7 +59,7 @@ event {
 event {
   source: "LOGCAT"
   name: "assistant_started"
-  regex: "START.*com\.google\.android\.googlequicksearchbox.*opa\.OpaActivity.*"
+  regex: "START.*com\.google\.android\.googlequicksearchbox.*opa\.OpaActivity.*|State changed: IDLE => FULL_LISTENING.*"
 }
 
 event {
