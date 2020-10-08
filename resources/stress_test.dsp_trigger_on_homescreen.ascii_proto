@@ -17,7 +17,6 @@ expected_result {
     assistant_started  : 1
     dsp_false_accept  : 0
     logcat_iteration  : 1
-    software_hotword  : 1
     speaker_id_rejected  : 0
     vis_software_hotword  : 1
 }
