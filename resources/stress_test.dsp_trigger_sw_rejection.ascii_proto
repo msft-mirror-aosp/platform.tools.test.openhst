@@ -48,8 +48,6 @@ expected_result {
     assistant_started  : 1
     dsp_false_accept  : 0
     logcat_iteration  : 1
-    software_hotword  : 2
-    speaker_id_rejected  : 1
     vis_software_hotword  : 2
 }
 
