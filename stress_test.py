@@ -249,6 +249,7 @@ class ProcessLogger(threading.Thread):
     last_line = None
     should_log = True
     first_run = True
+    skip_exception_line = False
     self.lock.acquire()
     last_run_time = 0
     while self.restart_process:
@@ -280,6 +281,10 @@ class ProcessLogger(threading.Thread):
               if last_line == line:
                 should_log = True
               continue
+            elif skip_exception_line:
+              # ignore the last line which caused UnicodeEncodeError
+              skip_exception_line = False
+              continue
 
           if self.output_fp:
             self.output_fp.write(line.decode("utf-8", "backslashreplace").rstrip())
@@ -291,6 +296,9 @@ class ProcessLogger(threading.Thread):
             if self.looking:
               event.ScanForEvent(line, lock=self.lock)
           last_line = line
+      except UnicodeEncodeError:
+        logging.exception("UnicodeEncodeError on running logger process")
+        skip_exception_line = True
       except:  # pylint:disable=bare-except
         logging.exception("Exception encountered running process")
       finally:
@@ -300,6 +308,7 @@ class ProcessLogger(threading.Thread):
           self.process.send_signal(signal.SIGTERM)
         should_log = False
       self.lock.acquire()
+
     self.lock.release()
     if pexpect:
       if self.process.exitstatus is not None:
