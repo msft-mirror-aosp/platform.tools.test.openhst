@@ -682,13 +682,13 @@ class Device(object):
     sdk = int(self.Command(
         ["shell", "getprop", "ro.build.version.sdk"]).strip())
     if sdk >= 24:  # SDK 24 = Android N
-      with open(bugreport, "w") as bugreport_fp:
+      with open(bugreport, "wb") as bugreport_fp:
         bugreport_fp.write(self.Command(["bugreport", bugreport]))
     else:
       bugreport_txt = os.path.join(self.output_root,
                                    "%s_bugreport_iteration_%06d.txt" %
                                    (self.name, self.iteration))
-      with open(bugreport_txt, "w") as bugreport_fp:
+      with open(bugreport_txt, "wb") as bugreport_fp:
         bugreport_fp.write(self.Command(["bugreport"]))
       self.Command(["zip", bugreport, bugreport_txt])
 
