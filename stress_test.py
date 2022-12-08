@@ -515,7 +515,7 @@ class Device(object):
           if count > expected_count * number_of_iterations:
             logging.info(
                 "[STRESS_TEST] In iteration %d, got duplicated %s : %d",
-                self.iteration, self.name, count)
+                self.iteration, event, count)
             logging.info("[STRESS_TEST] Will count only : %d",
                          expected_count * number_of_iterations)
             count = expected_count * number_of_iterations
@@ -637,6 +637,9 @@ class Device(object):
   def __AsyncCommand(self, command, log_output=False):
     result = self.Command(command).strip()
     if result and log_output:
+      # log both logcat and stress testing log
+      # some test will depend on adb command output (ex: dumpsys)
+      self.Command(['shell', 'log', '-t', 'STRESS_TEST', result])
       for line in result.splitlines():
         logging.info(line.decode("utf-8"))
 
